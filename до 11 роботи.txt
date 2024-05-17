@@ -1,0 +1,172 @@
+// до роботи 11
+//робота з вмістом тектового файлу
+//перед початком роботи створити файл з даними. Тут 1.txt
+//підключаємо файлові потоки
+ /* #include <fstream>
+  #include <string>
+  #include <iostream>
+  using namespace std;
+  //рахуємо цифри всередині файлу
+  int CountDigit(string& name);
+//видаляємо дещо з нього sі пишемо це в іншиий файл
+  void DeleteDigit(string& str);
+
+  int main() {
+   // назву файлу
+    string nameFile;
+    cout<< "Input name file: ";
+    cin>> nameFile;
+    //викликаємо функцію в яку передаємо лише імя файлу
+     cout<<" кількість цифр  " <<CountDigit(nameFile);
+    DeleteDigit(nameFile);
+      return 0;
+  }
+
+  int CountDigit(string& name)
+  {
+    int count=0;
+    // створюємо файлову змінну і відкриваємо файл
+    fstream input(name);
+     //для вмісту файлу
+    string line;
+    
+    while (getline(input, line)) 
+    {
+       for (char c : line) 
+          {
+            if (isdigit(c)) {
+               count++;
+             }
+          }
+    }
+    input.close();
+     return  count;
+    }
+
+void DeleteDigit(string& nameF)
+{
+  //створюємо файлову змінну роботи з початковим файлом
+  ifstream in(nameF);
+  //створюємо файлову змінну для файлу з результатом
+  ofstream out("result.txt");
+  string line;
+
+  while (getline(in, line)) {
+     //формуємо новий рядок без цифр 
+    string newLine;
+
+        for (char c : line) {
+          if (!isdigit(c)) {
+              newLine += c;
+          }
+      }
+
+      out << newLine << "\n";
+  }
+
+  in.close();
+  out.close();
+}*/
+
+
+
+//робота з бінарним файлом
+
+//підключаєм бібліотеку для роботи з потоками вводу-виводу
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
+
+struct Employee
+{
+ string name;
+ int age;
+ float salary;
+};
+
+int main()
+{
+ Employee worker = { "Ivann", 23, 12000.00 };
+ // Відкриття файлу для запису в режимі бінарного запису
+ fstream f("test.dat", ios:: app);
+ // Перевірка, чи файл відкрито
+ if (!f.is_open()) {
+ cout << "failed to open" << endl;
+ return 1;
+ }
+ // Запис даних у файл
+ f.write((char*)&worker, sizeof(Employee));
+ // Закриваємо файл
+ f.close();
+ cout << "success!" << endl;
+  // Відкриття файлу для зчитування
+   ifstream f1("test.dat");
+   // Перевірка, чи файл успішно відкрито
+   if (!f1.is_open()) {
+   cout << "failed to open!" << endl;
+   return 1;
+   }
+   // Зчитування даних з файлу
+   f1.read((char*)&worker, sizeof(Employee));
+   // Виведення даних
+   cout << "Name: " << worker.name << endl;
+   cout << "Age: " << worker.age << endl;
+   cout << "Salary: " << worker.salary << endl;
+   f1.close();
+   return 0;
+  }
+
+
+//читання з бінарного файлу
+/*struct Employee
+{
+ string name;
+ int age;
+ float salary;
+};
+int main(){
+ Employee worker;
+ // Відкриття файлу для зчитування
+ ifstream f("test.dat", ios::binary);
+ // Перевірка, чи файл успішно відкрито
+ if (!f.is_open()) {
+ cout << "failed to open!" << endl;
+ return 1;
+ }
+ // Зчитування даних з файлу
+ f.read((char*)&worker, sizeof(Employee));
+ // Виведення даних
+ cout << "Name: " << worker.name << endl;
+ cout << "Age: " << worker.age << endl;
+ cout << "Salary: " << worker.salary << endl;
+ f.close();
+ return 0;
+}*/
+/*int main()
+{
+ Employee worker = { "Petrenko", 23, 12000.00 };
+ // Відкриття файлу для запису в режимі бінарного запису
+ fstream f("test.dat", ios::out | ios::binary| ios:: app );
+ // Перевірка, чи файл відкрито
+ if (!f.is_open()) {
+ cout << "failed to open" << endl;
+ return 1;
+ }
+ // Запис даних у файл
+ f.write((char*)&worker, sizeof(Employee));
+ // Закриваємо файл
+ f.close();
+ cout << "success!" << endl;
+ return 0;
+}*/
+/*int main()
+{
+fstream fin("1.txt");
+char line[80];
+while (fin.getline(line, sizeof(line)))
+{
+cout << line << endl;
+}
+return 0;
+}*/

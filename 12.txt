@@ -1,0 +1,59 @@
+main.cpp
+#include <iostream>
+#include "functions.h"
+#include <string>
+using namespace std;
+
+extern string Sentence;
+
+int main() {
+inputData();
+cout << CountCharA(Sentence)<< endl;;
+displayResult();
+return 0;
+}
+
+functions.cpp
+
+#include "functions.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+string Sentence;
+
+void inputData() {
+cout << "Enter a sentence:";
+getline(cin, Sentence);
+}
+
+int CountCharA(string Sentence)
+{
+size_t pos = 0;
+int k = 0;
+  char ch='a';
+  while ((pos = Sentence.find(ch, pos)) != -1)
+{
+k++;
+pos++;
+}
+return k;
+}
+
+functions.h
+
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
+#include <string>
+using namespace std;
+extern string Sentence;
+
+void inputData();
+int CountCharA(string Sentence);
+void displayResult();
+
+#endif // FUNCTIONS_H
+
+void displayResult() {
+cout <<"Result:"  <<  Sentence << endl;
+}
